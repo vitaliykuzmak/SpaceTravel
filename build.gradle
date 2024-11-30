@@ -1,0 +1,13 @@
+plugins {
+    id 'java'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.hibernate:hibernate-core:5.6.15.Final'
+    implementation 'com.h2database:h2:2.1.214'
+    implementation 'org.flywaydb:flyway-core:9.8.1'
+}
