@@ -8,6 +8,9 @@ repositories {
 
 dependencies {
     implementation 'org.hibernate:hibernate-core:5.6.15.Final'
-    implementation 'com.h2database:h2:2.1.214'
+    implementation 'com.h2database:h2:2.2.220'
     implementation 'org.flywaydb:flyway-core:9.8.1'
+    implementation 'javax.validation:jakarta.validation-api:3.0.2'
+    implementation 'org.hibernate.validator:hibernate-validator:8.0.1.Final'
+
 }

@@ -1,5 +1,7 @@
 package com.example;
 
+import jakarta.validation.constraints.Pattern;
+
 import javax.persistence.*;
 
 import javax.persistence.Column;
@@ -11,6 +13,7 @@ import javax.persistence.Table;
 public class Planet {
 
     @Id
+    @Pattern(regexp = "^[A-Z0-9]+$", message = "ID must contain only uppercase Latin letters and digits")
     @Column(length = 10)
     private String id;
 
