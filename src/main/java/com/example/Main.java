@@ -6,36 +6,42 @@ import javax.persistence.Persistence;
 
 public class Main {
     public static void main(String[] args) {
+        // Ініціалізація EntityManager
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("spacetravel");
         EntityManager em = emf.createEntityManager();
 
-        // ClientCRUDService
         ClientCrudService clientService = new ClientCrudService(em);
-        Client newClient = new Client("Test Client");
-        clientService.create(newClient);
-
-        Client client = clientService.read(newClient.getId());
-        System.out.println("Read Client: " + client);
-
-        client.setName("Updated Client");
-        clientService.update(client);
-
-        clientService.delete(client.getId());
-
-        // PlanetCRUDService
         PlanetCrudService planetService = new PlanetCrudService(em);
-        Planet newPlanet = new Planet("PLT01", "Test Planet");
-        planetService.create(newPlanet);
+        TicketCrudService ticketService = new TicketCrudService(em);
 
-        Planet planet = planetService.read(newPlanet.getId());
-        System.out.println("Read Planet: " + planet);
+        // Додати клієнта
+        Client client = new Client("John Doe");
+        clientService.create(client);
 
-        planet.setName("Updated Planet");
-        planetService.update(planet);
+        // Додати планети
+        Planet earth = new Planet("EARTH", "Earth");
+        Planet mars = new Planet("MARS", "Mars");
+        planetService.create(earth);
+        planetService.create(mars);
 
-        planetService.delete(planet.getId());
+        // Створити квиток
+        Ticket ticket = new Ticket(client, earth, mars);
+        ticketService.create(ticket);
 
+        // Прочитати квиток
+        Ticket readTicket = ticketService.read(ticket.getId());
+        System.out.println("Read Ticket: " + readTicket);
+
+        // Оновити квиток
+        readTicket.setToPlanet(earth);
+        ticketService.update(readTicket);
+
+        // Видалити квиток
+        ticketService.delete(readTicket.getId());
+
+        // Закриття EntityManager
         em.close();
         emf.close();
     }
 }
+
